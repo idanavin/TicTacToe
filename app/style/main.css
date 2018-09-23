@@ -1,0 +1,37 @@
+.container {
+    height: 300px;
+    width: 300px;
+    margin: auto;
+    float: center;
+    align-content: center;
+}
+
+.game {
+    display: grid;
+    height: 300px;
+    width: 300px;
+    grid-template-columns: auto auto auto;
+    grid-gap: 5px;
+    background-color: #2196F3;
+    padding: 10px;
+}
+
+.game>li {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#game>li.x {
+    font-size: 40px;
+    color: #ed4e6e
+}
+
+#game>li.o {
+    font-size: 40px;
+    color: #485b6e;
+}
