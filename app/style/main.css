@@ -26,6 +26,16 @@
     text-align: center;
 }
 
+.game>h {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 #game>li.x {
     font-size: 40px;
     color: #ed4e6e
