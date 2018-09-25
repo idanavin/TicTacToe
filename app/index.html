@@ -10,30 +10,25 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
+    <div id="console"></div>
     <div class="container">
         <div class="game" id="gBoard">
-            <li data-pos="0,0"></li>
-            <li data-pos="0,1"></li>
-            <li data-pos="0,2"></li>
+            <h data-pos="0,0"></h>
+            <h data-pos="0,1"></h>
+            <h data-pos="0,2"></h>
 
-            <li data-pos="1,0"></li>
-            <li data-pos="1,1"></li>
-            <li data-pos="1,2"></li>
+            <h data-pos="1,0"></h>
+            <h data-pos="1,1"></h>
+            <h data-pos="1,2"></h>
 
-            <li data-pos="2,0"></li>
-            <li data-pos="2,1"></li> 
-            <li data-pos="2,2"></li>
-            <!-- <div class="grid" id="box1"></div>
-            <div class="grid" id="box2"></div>
-            <div class="grid" id="box3"></div>
-            <div class="grid" id="box4"></div>
-            <div class="grid" id="box5"></div>
-            <div class="grid" id="box6"></div>
-            <div class="grid" id="box7"></div>
-            <div class="grid" id="box8"></div>
-            <div class="grid" id="box9"></div> -->
+            <h data-pos="2,0"></h>
+            <h data-pos="2,1"></h> 
+            <h data-pos="2,2"></h>
         </div>
+        <br>
+        <button onclick="reset()">Reset game</button>
     </div>
-    <div id="winner"></div>
+    <br>
+    <div id="score">Score:<br>Player X: <div class="pnt" id="xpnt"></div> Player O: <div class="pnt" id="opnt"></div></div>
 </body>
 </html>

@@ -1,3 +1,9 @@
+#console{
+    font-size: 40px;
+    color: red;
+    text-align: center;
+}
+
 .container {
     height: 300px;
     width: 300px;
@@ -16,32 +22,47 @@
     padding: 10px;
 }
 
-.game>li {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding: 20px 0;
-    font-size: 30px;
-    cursor: pointer;
-    text-transform: uppercase;
-    text-align: center;
-}
-
 .game>h {
     background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
     padding: 20px 0;
-    font-size: 30px;
+    font-size: 40px;
     cursor: pointer;
     text-transform: uppercase;
     text-align: center;
 }
 
-#game>li.x {
+.game>h#x {
     font-size: 40px;
     color: #ed4e6e
 }
 
-#game>li.o {
+.game>h#o {
     font-size: 40px;
     color: #485b6e;
+}
+
+button{
+    text-align: center;
+    display: contents;
+    margin: auto;
+}
+
+#score{
+    text-align: center;
+    font-size: 30px;
+    color: darkgreen;
+}
+
+.pnt {
+    text-align: center;
+    font-size: 30px;
+}
+
+#xpnt {
+    color: red;
+}
+
+#opnt {
+    color: blue;
 }
