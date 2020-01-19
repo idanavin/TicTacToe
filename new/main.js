@@ -1,14 +1,12 @@
 let board;
-let winner = null;
 let active;
 const players = ['X', 'O'];
 const colors = ['blue', 'red', 'green', 'pink'];
-let canv = document.createElement("canvas");
-document.body.append(canv);
+let canv = document.querySelector("canvas");
 let ctx = canv.getContext('2d');
 
 function drawBoard() {
-    canvSize = getSize(canv);
+    let canvSize = getSize(canv);
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
@@ -32,9 +30,9 @@ function play(mousex, mousey) {
             if (mousex > i * canvSize.w && mousex < (i * canvSize.w) + canvSize.w) {
                 if (mousey > j * canvSize.h && mousey < (j * canvSize.h) + canvSize.h) {
                     if (!board[i][j]) {
-                        board[i].splice(j, 1, players[active]);
-                        ctx.fillStyle = colors[active];
-                        ctx.fillText(players[active], (i * canvSize.w) + (canvSize.w / 2), (j * canvSize.h) + (canvSize.h / 2), canvSize.w);
+                        // board[i].splice(j, 1, players[active]);
+                        board[i][j] = players[active];
+                        drawMove(i, j);
                         played = true;
                     }
                 }
@@ -44,7 +42,14 @@ function play(mousex, mousey) {
     return played;
 }
 
+function drawMove(i, j) {
+    let canvSize = getSize(canv);
+    ctx.fillStyle = colors[active];
+    ctx.fillText(players[active], (i * canvSize.w) + (canvSize.w / 2), (j * canvSize.h) + (canvSize.h / 2), canvSize.w);
+}
+
 function checkWinner() {
+    let winner = null;
     let notAvailable = [];
     for (let i = 0; i < 3; i++) {
         //Horizontal
@@ -73,6 +78,7 @@ function checkWinner() {
     if (notAvailable.length > 8 && !winner) {
         winner = 'tie';
     }
+    return winner
 }
 
 function endGame(score) {
@@ -95,22 +101,25 @@ function endGame(score) {
     winner = null;
 }
 
-function nextTurn() {
+function nextTurn(winner) {
     if (winner) {
         endGame(winner);
     }
     else {
         active = 1 - active;
+        bestMove();
     }
 }
 
 function getMousePos(e) {
-    let mousex =  e.offsetX;
-    let mousey = e.offsetY;
-    let isPlayed = play(mousex, mousey);
-    if (isPlayed) {
-        checkWinner();
-        nextTurn();  
+    if (active === 1) {
+        let mousex =  e.offsetX;
+        let mousey = e.offsetY;
+        let isPlayed = play(mousex, mousey);
+        if (isPlayed) {
+            let winner = checkWinner();
+            nextTurn(winner);  
+        }
     }
 }
 
@@ -131,7 +140,8 @@ function newGame() {
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     drawBoard();
-    canv.removeEventListener('click', newGame)
+    bestMove();
+    canv.removeEventListener('click', newGame);
     canv.addEventListener('click', getMousePos);
 }
 
