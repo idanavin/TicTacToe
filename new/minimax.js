@@ -24,7 +24,6 @@ function bestMove() {
   }
 
   if (!moves[Index].done) {
-    console.log(move);
     moves[Index].i = move.i
     moves[Index].j = move.j
     moves[Index].play();
