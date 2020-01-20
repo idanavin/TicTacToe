@@ -11,10 +11,10 @@ function bestMove() {
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
       // Is the spot available?
-      if (board[i][j] == '') {
-        board[i][j] = players[0];
-        let score = minimax(board, 0, false);
-        board[i][j] = '';
+      if (board.boardArr[j][i] == '') {
+        board.boardArr[j][i] = board.players[0];
+        let score = minimax(board.boardArr, 0, false);
+        board.boardArr[j][i] = '';
         if (score > bestScore) {
           bestScore = score;
           move = { i, j };
@@ -22,10 +22,13 @@ function bestMove() {
       }
     }
   }
-  board[move.i][move.j] = players[0];
-  drawMove(move.i, move.j);
-  // active = 1 - active;
-  nextTurn();
+
+  if (!moves[Index].done) {
+    console.log(move);
+    moves[Index].i = move.i
+    moves[Index].j = move.j
+    moves[Index].play();
+  }
 }
 
 let scores = {
@@ -34,8 +37,8 @@ let scores = {
   tie: 0
 };
 
-function minimax(board, depth, isMaximizing) {
-  let result = checkWinner();
+function minimax(mnxBoard, depth, isMaximizing) {
+  let result = board.checkWin();
   if (result !== null) {
     return scores[result];
   }
@@ -45,10 +48,10 @@ function minimax(board, depth, isMaximizing) {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         // Is the spot available?
-        if (board[i][j] == '') {
-          board[i][j] = players[0];
-          let score = minimax(board, depth + 1, false);
-          board[i][j] = '';
+        if (mnxBoard[j][i] == '') {
+          mnxBoard[j][i] = board.players[0];
+          let score = minimax(mnxBoard, depth + 1, false);
+          mnxBoard[j][i] = '';
           bestScore = Math.max(score, bestScore);
         }
       }
@@ -59,10 +62,10 @@ function minimax(board, depth, isMaximizing) {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         // Is the spot available?
-        if (board[i][j] == '') {
-          board[i][j] = players[1];
-          let score = minimax(board, depth + 1, true);
-          board[i][j] = '';
+        if (mnxBoard[j][i] == '') {
+          mnxBoard[j][i] = board.players[1];
+          let score = minimax(mnxBoard, depth + 1, true);
+          mnxBoard[j][i] = '';
           bestScore = Math.min(score, bestScore);
         }
       }
