@@ -24,7 +24,8 @@ function bestMove() {
   }
   board[move.i][move.j] = players[0];
   drawMove(move.i, move.j);
-  active = 1;
+  // active = 1 - active;
+  nextTurn();
 }
 
 let scores = {
