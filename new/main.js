@@ -1,4 +1,4 @@
-let points = { X: 0, O: 0 };
+let points = {X: 0, O: 0};
 let canv = document.querySelector("canvas");
 let ctx = canv.getContext('2d');
 
@@ -37,8 +37,17 @@ function newGame() {
 }
 
 window.onload = function () {
+    if (localStorage.length == 0){
+        localStorage.setItem('X', 0);
+        localStorage.setItem('O', 0);
+    }
+    else {
+        points = board.getPoints();
+        // console.log(board.getPoints());
+    }
     newGame();
     updateScore();
+    
 };
 
 function loop() {

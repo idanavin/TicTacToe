@@ -51,7 +51,8 @@ class Board {
             endText = 'Its a tie';
         }
         else {
-            points[score] += 1;
+            let prev = this.getPoints();
+            this.setPoints(score, prev[score]);
             updateScore();
             endText = `${score} Wins!`
         }
@@ -65,6 +66,23 @@ class Board {
         canv.addEventListener('click', newGame);
     }
 
+    getPoints() {
+        let X = Number(localStorage.getItem('X'));
+        let O = Number(localStorage.getItem('O'));
+        return {X, O}
+    }
+
+    setPoints(winner, prevS) {
+        let s = prevS + 1;
+        localStorage.setItem(winner, s);
+        points[winner] = s;
+    }
+
+    resetPoints() {
+        localStorage.clear();
+        points = {X: 0, O: 0};
+    }
+    
     show() {
         for (let i = 0; i < this.game.row; i++) {
             for (let j = 0; j < this.game.col; j++) {
