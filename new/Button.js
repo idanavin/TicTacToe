@@ -40,6 +40,13 @@ class Button {
         if (this.id === 'localStorageClear') {
             board.resetPoints();
         }
+        if (this.id === 'cell') {
+            let mousex = e.offsetX;
+            let mousey = e.offsetY;
+            if (!moves[Index].done) {
+                moves[Index].getMouseIndex(mousex, mousey);
+            }
+        }
     }
 
     show() {

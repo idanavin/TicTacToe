@@ -22,11 +22,9 @@ function bestMove() {
       }
     }
   }
-
-  if (!moves[Index].done) {
-    moves[Index].i = move.i
-    moves[Index].j = move.j
-    moves[Index].play();
+  let index = moves.length - 1
+  if (!moves[index].done) {
+    moves[index].play(move.i, move.j);
   }
 }
 
