@@ -46,30 +46,39 @@ class Board {
     }
 
     endGame(score) {
+        if (score !== 'tie') {
+            let prev = this.getPoints();
+            this.setPoints(score, prev[score]);
+        }
+        canv.removeEventListener('click', getMousePos);
+    }
+
+    createEndButton(score) {
         let endText = '';
         if (score === 'tie') {
             endText = 'Its a tie';
         }
         else {
-            let prev = this.getPoints();
-            this.setPoints(score, prev[score]);
-            updateScore();
             endText = `${score} Wins!`
         }
-        ctx.font = 'bold 72px sans-serif';
-        ctx.fillStyle = this.colors[1];
-        ctx.fillRect(this.w / 2, this.h / 2, 2 * this.w, 2 * this.h);
-        ctx.fillStyle = this.colors[0];
-        ctx.fillText(endText, this.width / 2, this.height / 2 - 100);
-        ctx.fillText(`Play again?`, this.width / 2, this.height / 2 + 100);
-        canv.removeEventListener('click', getMousePos);
-        canv.addEventListener('click', newGame);
+        let options = { font: 'bold 1.2rem sans-serif' };
+        buttons.push(new Button(this.width / 2, this.h, 300, 100, endText, 'end1', 'end'));
+        buttons.push(new Button(60, this.h * 2, 120, 65, 'Play again?', 'restart', 'end', options));
+        buttons.push(new Button(this.width - 60, this.h * 2, 120, 65, 'Main menu', 'end3', 'end', options));
+        canv.addEventListener('click', this.buttonsClick, true);
     }
+
+    buttonsClick(e) {
+        for (let b in buttons) {
+            buttons[b].canvasClick(e);
+        }
+    }
+
 
     getPoints() {
         let X = Number(localStorage.getItem('X'));
         let O = Number(localStorage.getItem('O'));
-        return {X, O}
+        return { X, O }
     }
 
     setPoints(winner, prevS) {
@@ -80,9 +89,9 @@ class Board {
 
     resetPoints() {
         localStorage.clear();
-        points = {X: 0, O: 0};
+        points = { X: 0, O: 0 };
     }
-    
+
     show() {
         for (let i = 0; i < this.game.row; i++) {
             for (let j = 0; j < this.game.col; j++) {
@@ -93,7 +102,7 @@ class Board {
 
     getSize(el) {
         this.width = el.width;
-        this.height = el.height;
+        this.height = el.height * 0.9;
         this.w = this.width / this.game.row;
         this.h = this.height / this.game.col;
     }

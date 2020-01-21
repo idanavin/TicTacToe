@@ -4,15 +4,8 @@ let ctx = canv.getContext('2d');
 
 let board = new Board(3, 3);
 let moves = [];
-let Index = 0
-
-function updateScore() {
-    let e = document.querySelectorAll('.score');
-
-    for (let i = 0; i < e.length; i++) {
-        e[i].innerHTML = points[board.players[i]];
-    }
-}
+let buttons = [];
+let Index = 0;
 
 function getMousePos(e) {
     let mousex = e.offsetX;
@@ -30,24 +23,39 @@ function newGame() {
     board.getSize(canv);
     board.init();
     board.show();
+    if (localStorage.length == 0){
+        board.resetPoints();
+    }
+    points = board.getPoints();
     bestMove();
-    canv.removeEventListener('click', newGame);
+    // canv.removeEventListener('click', board.buttonsClick);
     canv.addEventListener('click', getMousePos);
     loop();
 }
 
 window.onload = function () {
-    if (localStorage.length == 0){
-        localStorage.setItem('X', 0);
-        localStorage.setItem('O', 0);
-    }
-    else {
-        points = board.getPoints();
-        // console.log(board.getPoints());
-    }
     newGame();
-    updateScore();
-    
+    buttons.push(new Button(board.w * 0.5, 15, 100, 30, 'reset score', 'localStorageClear', 'home', {
+        font: '0.7rem sans-serif',
+        bgc: 'grey',
+        color: 'white'
+    }),
+    new Button(board.w * 2.5, 15, 100, 30, 'New Game', 'restart', 'home', {
+        font: '0.7rem sans-serif',
+        bgc: 'grey',
+        color: 'white'
+    }),
+    new Button(board.w, board.height - 15, 100, 30, board.getPoints().X, 'X', 'score', {
+        font: '0.7rem sans-serif',
+        bgc: 'grey',
+        color: 'white'
+    }),
+    new Button(board.w * 2, board.height - 15, 100, 30, board.getPoints().O, 'O', 'score', {
+        font: '0.7rem sans-serif',
+        bgc: 'grey',
+        color: 'white'
+    })),
+    console.log(board.getPoints());
 };
 
 function loop() {
@@ -58,7 +66,18 @@ function loop() {
         let winner = board.checkWin();
         if (winner) {
             board.endGame(winner);
+            board.createEndButton(winner);
             clearInterval(l)
+        }
+        if (buttons) {
+            for (let m in buttons) {
+                buttons[m].show();
+
+                if (buttons[m].c === 'score') {
+                    let id = buttons[m].id;
+                    buttons[m].txt = board.getPoints()[id];
+                }
+            }
         }
     }, 100);
 }

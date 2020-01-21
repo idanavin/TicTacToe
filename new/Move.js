@@ -42,6 +42,7 @@ class Move {
 
     show() {
         if (this.done) {
+            ctx.font = '4rem sans-serif';
             ctx.fillStyle = this.colors[this.active];
             ctx.fillText(board.boardArr[this.j][this.i], (this.i * board.w) + (board.w / 2), (this.j * board.h) + (board.h / 2), board.w);
         }
