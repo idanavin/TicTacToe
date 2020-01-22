@@ -22,9 +22,9 @@ class Cell extends Button {
 
 
     show() {
-        let h = this.h * 0.9;
-        let hgap = this.h * 0.1
         ctx.font = this.opt && this.opt.font ? this.opt.font : 'bold 3.5rem sans-serif';
+        ctx.fillStyle = this.opt && this.opt.bgc ? this.opt.bgc : 'white';
+        ctx.fillRect(this.x, this.y, this.w, this.h);
         ctx.strokeRect(this.x, this.y, this.w, this.h);
     }
 }

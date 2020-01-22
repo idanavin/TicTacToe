@@ -1,7 +1,6 @@
 class Board {
-    constructor(row, col) {
-        this.game = { row, col };
-        this.l = row * col;
+    constructor() {
+
     }
 
     colors = ['green', 'pink'];
@@ -16,9 +15,16 @@ class Board {
             }
         }
         ctx.clearRect(0, 0, this.width, this.height);
-        ctx.font = 'bold 48px sans-serif';
+        ctx.font = 'bold 3.5rem sans-serif';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
+    }
+
+    getGame(row, col) {
+        this.game = { row, col };
+        this.l = row * col;
+        this.w = this.width / row;
+        this.h = this.height / col;
     }
 
     checkWin() {
@@ -51,7 +57,6 @@ class Board {
             let prev = this.getPoints();
             this.setPoints(score, prev[score]);
         }
-        // canv.removeEventListener('click', getMousePos);
     }
 
     removeCells() {
@@ -67,10 +72,7 @@ class Board {
         else {
             endText = `${score} Wins!`
         }
-        let options = { font: 'bold 1.2rem sans-serif' };
-        buttons.push(new Button(this.width / 2, this.h, 300, 100, endText, 'end1', 'end'));
-        // buttons.push(new Button(60, this.h * 2, 120, 65, 'Play again?', 'restart', 'end', options));
-        // buttons.push(new Button(this.width - 60, this.h * 2, 120, 65, 'Main menu', 'end3', 'end', options));
+        createEndGameButtons(endText);
     }
 
     buttonsClick(e) {
@@ -102,15 +104,12 @@ class Board {
         let hgap = this.height * 0.1
         let w = this.w;
         let opt = {
-            bgc: 'blue'
+            bgc: 'rgba(42, 204, 232, 0.3)'
         }
-        // console.log('called');
-        
+
         for (let i = 0; i < this.game.row; i++) {
             for (let j = 0; j < this.game.col; j++) {
-                buttons.push(new Cell((i * w), (j * h) + hgap, w, h, '', i +j, 'cell', opt, i, j))
-                // console.log(buttons);
-                
+                buttons.push(new Cell((i * w), (j * h) + hgap, w, h, '', i + j, 'cell', opt, i, j))
             }
         }
     }
@@ -119,8 +118,8 @@ class Board {
         this.width = el.width;
         this.height = el.height;
         this.ygap = this.height * 0.1;
-        this.w = this.width / this.game.row;
-        this.h = this.height / this.game.col;
+        this.w = this.width / 2;
+        this.h = this.height / 2;
     }
 
 }
