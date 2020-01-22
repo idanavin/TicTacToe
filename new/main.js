@@ -21,27 +21,24 @@ function newGame() {
     board.getSize(canv);
     board.init();
     // board.show();
-    board.createCell();
+    board.createCell();;
     if (localStorage.length == 0) {
         board.resetPoints();
     }
     points = board.getPoints();
     bestMove();
-    canv.addEventListener('click', (e) => {
-        for (let b in buttons) {
-            buttons[b].canvasClick(e);
-        }
-    });
+
     loop();
 }
 
 window.onload = function () {
     newGame();
-    buttons.push(new Button(board.w * 0.5, board.ygap / 2, 100, 30, 'reset score', 'localStorageClear', 'home', {
-        font: '0.7rem sans-serif',
-        bgc: 'grey',
-        color: 'white'
-    }),
+    buttons.push(
+        new Button(board.w * 0.5, board.ygap / 2, 100, 30, 'reset score', 'localStorageClear', 'home', {
+            font: '0.7rem sans-serif',
+            bgc: 'grey',
+            color: 'white'
+        }),
         new Button(board.w * 2.5, board.ygap / 2, 100, 30, 'New Game', 'restart', 'home', {
             font: '0.7rem sans-serif',
             bgc: 'grey',
@@ -56,7 +53,13 @@ window.onload = function () {
             font: '0.7rem sans-serif',
             bgc: 'grey',
             color: 'white'
-        }))
+        })
+    );
+    canv.addEventListener('click', (e) => {
+        for (let b in buttons) {
+            buttons[b].canvasClick(e);
+        }
+    });
 };
 
 function loop() {

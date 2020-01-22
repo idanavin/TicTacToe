@@ -35,6 +35,13 @@ class Button {
             buttons = buttons.filter((value, index) => {
                 return buttons[index].c !== 'end';
             });
+            // for (var i = 0; i < buttons.length; i++) {
+            //     if (buttons[i].c === 'end') {
+            //         buttons.splice(i, 1);
+            //         i--;
+            //     }
+            // }
+            board.removeCells();
             newGame();
         }
         if (this.id === 'localStorageClear') {

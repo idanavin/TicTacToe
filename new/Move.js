@@ -17,22 +17,6 @@ class Move {
         }
     }
 
-    // getMouseIndex(mx, my) {
-    //     for (let i = 0; i < board.boardArr.length; i++) {
-    //         for (let j = 0; j < board.boardArr[i].length; j++) {
-    //             if (mx > i * board.w && mx < (i * board.w) + board.w) {
-    //                 if (my > j * board.h && my < (j * board.h) + board.h) {
-    //                     if (!board.boardArr[j][i]) {
-    //                         this.i = i;
-    //                         this.j = j;
-    //                         this.play();
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
     nextTurn() {
         moves.push(new Move(1 - this.active));
         if (this.active) {

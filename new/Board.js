@@ -97,17 +97,6 @@ class Board {
         points = { X: 0, O: 0 };
     }
 
-    // show() {
-    //     let h = this.h * 0.9;
-    //     let hgap = this.height * 0.1
-    //     let w = this.w;
-    //     for (let i = 0; i < this.game.row; i++) {
-    //         for (let j = 0; j < this.game.col; j++) {  
-    //             ctx.strokeRect((i * w), (j * h) + hgap, w, h);
-    //         }
-    //     }
-    // }
-
     createCell() {
         let h = this.h * 0.9;
         let hgap = this.height * 0.1
@@ -115,10 +104,13 @@ class Board {
         let opt = {
             bgc: 'blue'
         }
-
+        // console.log('called');
+        
         for (let i = 0; i < this.game.row; i++) {
-            for (let j = 0; j < this.game.col; j++) {  
+            for (let j = 0; j < this.game.col; j++) {
                 buttons.push(new Cell((i * w), (j * h) + hgap, w, h, '', i +j, 'cell', opt, i, j))
+                // console.log(buttons);
+                
             }
         }
     }
