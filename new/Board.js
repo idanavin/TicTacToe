@@ -69,8 +69,8 @@ class Board {
         }
         let options = { font: 'bold 1.2rem sans-serif' };
         buttons.push(new Button(this.width / 2, this.h, 300, 100, endText, 'end1', 'end'));
-        buttons.push(new Button(60, this.h * 2, 120, 65, 'Play again?', 'restart', 'end', options));
-        buttons.push(new Button(this.width - 60, this.h * 2, 120, 65, 'Main menu', 'end3', 'end', options));
+        // buttons.push(new Button(60, this.h * 2, 120, 65, 'Play again?', 'restart', 'end', options));
+        // buttons.push(new Button(this.width - 60, this.h * 2, 120, 65, 'Main menu', 'end3', 'end', options));
     }
 
     buttonsClick(e) {
