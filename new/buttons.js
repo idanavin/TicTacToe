@@ -10,13 +10,14 @@ function createMenuButtons() {
         font: '1rem sans-serif'
     }
     let opt2 = {
-        bgc: '#61cfff',
+        bgc: '#1414',
         color: 'black',
         font: '0.7rem sans-serif',
         animate: {
-            // x: 0,
-            y: 50,
-            op: 0
+            x: 10,
+            y: 10,
+            op: 0,
+            rate: 15
         }
     }
     buttons.push(

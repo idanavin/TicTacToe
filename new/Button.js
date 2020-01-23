@@ -6,19 +6,22 @@ class Button {
         this.h = h;
         this.txt = txt
         this.id = id
+        this.opacity = 1;
+        this.center = { x: (this.x - (this.w / 2)), y: (this.y - (this.h / 2)) };
         if (opt) {
             this.opt = opt;
+            if (opt.animate) {
+                this.animate(opt.animate)
+                // this.opacity = opt.animate.op;
+            }
         }
         if (c) {
             this.c = c
         }
-        this.center = { x: (this.x - (this.w / 2)), y: (this.y - (this.h / 2)) };
     }
 
-
-
     colors = ['grey', 'white'];
-    opacity = 1;
+
 
     canvasClick(e) {
         let mousex = e.offsetX;
@@ -31,22 +34,27 @@ class Button {
     }
 
     animate(from) {
-        let endState = { x: this.x, y: this.y, w: this.w, h: this.h, op: this.opacity }
-        this.x = from.x ? from.x : this.x;
-        this.y = from.y ? from.y : this.y;
-        this.op = from.op ? from.op : this.op;
-
-        if (this.x !== from.x) {            
-            this.x += 10;
+        let endVal = { x: this.x, y: this.y }
+        this.x -= from.x;
+        this.center.x -= from.x;
+        this.y -= from.y;
+        this.center.y -= from.y;
+        this.opacity = from.op;
+        for (let i = 0; i < 100; i++) {
+            setTimeout(() => {
+                if (this.x !== endVal.x) {
+                    this.x += (from.x * 0.01);
+                    this.center.x += (from.x * 0.01);
+                }
+                if (from.y) {
+                    this.y += (from.y * 0.01);
+                    this.center.y += (from.y * 0.01);
+                }
+                if (this.opacity !== 1) {
+                    this.opacity += 0.01;
+                }
+            }, (i * 5))
         }
-        if (this.y !== from.y) {
-            this.y += 10;
-        }
-        if (this.op !== from.op) {
-            this.op += 0.1;
-        }
-
-
     }
 
     act() {
@@ -95,6 +103,9 @@ class Button {
             // this.animate(this.opt.animate);
         }
         ctx.translate(0, 0);
+        // console.log(this.opacity);
+
+        ctx.globalAlpha = this.opacity;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.font = this.opt && this.opt.font ? this.opt.font : 'bold 3.5rem sans-serif';
