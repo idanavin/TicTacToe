@@ -3,8 +3,9 @@
 // https://thecodingtrain.com/CodingChallenges/154-tic-tac-toe-minimax.html
 // https://youtu.be/I64-UTORVfU
 // https://editor.p5js.org/codingtrain/sketches/0zyUhZdJD
+import { board } from './main';
 
-function bestMove() {
+export function bestMove() {
   // AI to make its turn
   let bestScore = -Infinity;
   let move;
@@ -22,9 +23,9 @@ function bestMove() {
       }
     }
   }
-  let index = moves.length - 1
-  if (!moves[index].done) {
-    moves[index].play(move.i, move.j);
+  let index = board.moves.length - 1
+  if (!board.moves[index].done) {
+    board.moves[index].play(move.i, move.j);
   }
 }
 
