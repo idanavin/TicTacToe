@@ -43,9 +43,9 @@ export class Move {
 
     nextTurn() {
         board.moves.push(new Move(1 - this.active));
-        // if (this.active) {
-        //     bestMove();
-        // }
+        if (this.active && board.game.row === 3) {
+            bestMove();
+        }
     }
 
     show() {

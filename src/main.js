@@ -12,7 +12,7 @@ export function resetBoardObj() {
 
 export function newGame() {
     board.init();
-    board.moves = [new Move(0)];
+    // board.moves = [new Move(0)];
     createGameButtons();
     createCellButtons();
     if (localStorage.length == 0) {
@@ -38,11 +38,20 @@ export function loop() {
         }
         if (board.buttons) {
             for (let m in board.buttons) {
-                board.buttons[m].show();
+                let button = board.buttons[m]
+                button.show();
 
-                if (board.buttons[m].c === 'score') {
-                    let id = board.buttons[m].id;
-                    board.buttons[m].txt = board.getPoints()[id];
+                if (button.c === 'score') {
+                    let id = button.id;
+                    button.txt = board.getPoints()[id];
+                }
+                if (button.c === 'turn') {
+                    const preTxt = 'Turn: ';
+                    if (board.moves) {
+                        let move = board.moves[board.moves.length - 1]
+                        let turn = move.players[move.active];
+                        button.txt = preTxt + turn;
+                    }
                 }
             }
         }

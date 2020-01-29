@@ -3,6 +3,7 @@
 import { Board } from './Board'
 import { board, newGame, loop, resetBoardObj } from './main';
 import { createMenuButtons } from './buttons'
+import { bestMove } from './minimax';
 
 export class Button {
     constructor(x, y, w, h, txt, id, c, opt) {
@@ -68,15 +69,20 @@ export class Button {
             // buttons = buttons.filter((value, index) => {
             //     return buttons[index].c !== 'end';
             // });
-            board.buttons = [];
-            board.removeCells();
+            if (board.checkWin()) {
+                loop();
+            }
+            board.setArrays();
             newGame();
-            loop();
+            if (board.game.row === 3) {
+                bestMove();
+            }
         }
         if (this.id === 'tic') {
             board.getGame(3, 3);
             board.setArrays();
             newGame();
+            bestMove();
         }
         if (this.id === 'four') {
             board.getGame(7, 7);
@@ -84,13 +90,13 @@ export class Button {
             newGame();
         }
         if (this.id === 'menu') {
-            if (board.checkWin()) {
-                loop();
-            }
             resetBoardObj();
             board.getCanvas();
             board.setListener();
             createMenuButtons();
+            if (board.checkWin()) {
+                loop();
+            }
         }
         if (this.id === 'localStorageClear') {
             board.resetPoints();

@@ -1,4 +1,4 @@
-import { board } from "./main";
+import { Move } from "./Move";
 
 export class Board {
     constructor() {
@@ -24,7 +24,7 @@ export class Board {
     }
 
     setArrays() {
-        this.moves = [];
+        this.moves = [new Move(0)];
         this.buttons = [];
         this.points = { X: 0, O: 0 };
     }
@@ -46,9 +46,6 @@ export class Board {
             }
         }
         this.ctx.clearRect(0, 0, this.width, this.height);
-        this.ctx.font = 'bold 3.5rem sans-serif';
-        this.ctx.textAlign = 'center';
-        this.ctx.textBaseline = 'middle';
     }
 
     getGame(row, col) {

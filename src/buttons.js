@@ -45,6 +45,12 @@ export function createGameButtons() {
         new Button((board.width / 2) - 125, board.height - 15, 100, 30, board.getPoints().X, 'X', 'score', opt),
         new Button((board.width / 2) + 125, board.height - 15, 100, 30, board.getPoints().O, 'O', 'score', opt)
     );
+    const opt2 = {
+        font: '1rem sans-serif',
+        bgc: 'aqua',
+        color: 'black'
+    }
+    board.buttons.push(new Button(55, 15, 110, 30, '', 'turn', 'turn', opt2))
 }
 
 export function createEndGameButtons(score) {
